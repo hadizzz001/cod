@@ -2,7 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/Poppins-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/Poppins-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
+  --font-poppins: "Poppins", sans-serif;
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -15,13 +40,177 @@
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+  font-family: "Poppins", sans-serif;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  background-color: white !important;
+  color: black !important;
+  border-radius: 9999px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+}
+
+.cards-aspect-video .swiper-button-prev,
+.cards-aspect-video .swiper-button-next {
+  top: 42%;
+  transform: translateY(-50%);
+}
+
+.swiper-button-prev {
+  left: 0.1rem !important;
+}
+
+.swiper-button-next {
+  right: 0.1rem !important;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: #f3f4f6;
+}
+
+.swiper-button-prev:focus,
+.swiper-button-next:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 1.3rem !important;
+  font-weight: bold;
+}
+
+@media (max-width: 639px) {
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none !important;
+  }
+}
+
+.hide-arrows .swiper-button-prev,
+.hide-arrows .swiper-button-next {
+  display: none !important;
+}
+
+.swiper-wrapper {
+  align-items: stretch;
+}
+
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+@keyframes shine {
+  0% {
+    background-position: -200%;
+  }
+
+  100% {
+    background-position: 200%;
+  }
+}
+
+.animate-shine {
+  background: linear-gradient(90deg, #facc15, #ffeb99, #facc15);
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 4s linear infinite;
+}
+
+
+@keyframes shineBackground {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.shiny-bg {
+  background: linear-gradient(110deg, #fbbf24, #fde68a, #fbbf24);
+  background-size: 200% auto;
+  animation: shineBackground 3s linear infinite;
+}
+
+
+
+@layer utilities {
+  @media (max-width: 1280px) and (min-width: 1000px) {
+    .mt-custom-15em {
+      margin-top: 15em !important;
+    }
+  }
+}
+
+
+#myMob {
+  position: fixed
+}
+
+#hero112211 {
+  margin-top: 5em;
+}
+
+@media (max-width: 1399px) {
+  #hero112211 {
+    margin-top: 4em;
+  }
+}
+@media (max-width: 1300px) {
+  #hero112211 {
+    margin-top: 4em;
+  }
+}
+
+@media (max-width: 768px) {
+  #myMob {
+    position: absolute;
+    display: contents;
+  }
+
+  #hero112211 {
+    margin-top: 1em;
+  }
+}
+
+
+@media (min-width: 770px) and (max-width: 1279px) {
+  .image-custom-responsive {
+    width: 450px !important;
+    height: 450px !important;
+    bottom: 0 !important;
+  }
+
+  #mynewtextaabb {
+    font-size: 55px !important;
+  }
+  #mynewimgaabb {
+    top: -3em !important;
   }
 }
