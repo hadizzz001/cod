@@ -37,18 +37,22 @@ const FAQ: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
           {faqItems.map((item, index) => (
-            <div key={index} className="bg-coducators-lightgray rounded-xl overflow-hidden h-fit">
-              <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value={`item-${index}`} className="border-0">
-                  <AccordionTrigger className="px-6 py-4 text-left font-semibold text-gray-900 hover:no-underline hover:bg-gray-100/50">
-                    {item.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="px-6 pb-4 pt-1 text-gray-700">
-                    {item.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            </div>
+<div
+  key={index}
+  className="bg-coducators-lightgray rounded-xl overflow-hidden h-fit border border-gray-300 dark:border-gray-700 shadow-sm"
+>
+  <Accordion type="single" collapsible className="w-full">
+    <AccordionItem value={`item-${index}`} className="border-0">
+      <AccordionTrigger className="px-6 py-4 text-left font-semibold text-gray-900 hover:no-underline hover:bg-gray-100/50">
+        {item.question}
+      </AccordionTrigger>
+      <AccordionContent className="px-6 pb-4 pt-1 text-gray-700">
+        {item.answer}
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</div>
+
           ))}
         </div>
 

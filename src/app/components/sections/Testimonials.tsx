@@ -8,12 +8,11 @@ import React, { useEffect, useState } from 'react';
 const Testimonials: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [inputs, setInputs] = useState({
-    attend: '',     // This seems like the "Attend" field, will keep it
+    attend: '', 
     name: '',
     son: '',
     age: '',
     description: '',
-    // removed stars from state
   });
   const [testimonials, setTestimonials] = useState([]);
 
@@ -22,18 +21,17 @@ const Testimonials: React.FC = () => {
       try {
         const res = await fetch('/api/rate');
         const data = await res.json();
-        setTestimonials(data.slice(0, 4)); // Get only the first 4 items
+        setTestimonials(data.slice(0, 4));
       } catch (error) {
         console.error('Failed to fetch testimonials:', error);
       }
     };
-
     fetchTestimonials();
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setInputs((prev) => ({ ...prev, [name]: value }));
+    setInputs(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -58,25 +56,22 @@ const Testimonials: React.FC = () => {
   };
 
   return (
-    <section
-      id="testimonials"
-      className="py-20 dark:bg-gray-900 dark:text-white"
-    >
-      <div className="container mx-auto px-4 ">
+    <section id="testimonials" className="py-20 dark:bg-gray-900 dark:text-white">
+      <div className="container mx-auto px-4">
         <SectionHeading
           title="Testimonials"
           subtitle="See how Coducators is making a difference—straight from those who’ve lived it."
           color="green"
         />
 
-        <div className="flex relative flex-wrap gap-6 justify-between items-start px-5 mt-10 w-full lg:min-h-[550px] max-md:max-w-full">
+        <div className="flex flex-wrap justify-between gap-6 mt-10 w-full min-h-[350px]">
           {testimonials.map((item, index) => (
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               viewport={{ once: true }}
-              className="lg:w-[48%]"
+              className="lg:w-[48%] w-full"
               key={index}
             >
               <TestimonialCard 
@@ -84,50 +79,38 @@ const Testimonials: React.FC = () => {
                 name={item.name}
                 attend={item.attend}
                 role={`Parent of ${item.son}, ${item.age}`}
-                imageUrl={`https://www.svgrepo.com/show/527946/user-circle.svg`} // or use a proper image from API
+                imageUrl="https://www.svgrepo.com/show/527946/user-circle.svg"
                 variant={
-                  index === 1
-                    ? 'green'
-                    : index === 2
-                    ? 'red'
-                    : index === 3
-                    ? 'blue'
-                    : 'blue'
+                  index === 1 ? 'green' : index === 2 ? 'red' : index === 3 ? 'blue' : 'blue'
                 }
-                className={cn(
-                  index === 1 && 'lg:mt-5',
-                  index === 2 && 'lg:mt-6',
-                  index === 3 && 'lg:mt-5'
-                )} 
+                className="h-[250px]" // fixed height for all cards
               />
             </motion.div>
           ))}
         </div>
-      </div>
 
-      <div className="flex items-center justify-center mt-5">
-<div className="flex gap-4">
-  <button
-    onClick={() => setShowModal(true)}
-    className="flex-1 px-6 py-3 bg-coducators-green text-white rounded-lg shadow hover:bg-green"
-  >
-    Rate Now!
-  </button>
-  <button
-    onClick={() => window.location.href = "/reviews"} // navigate to reviews page
-    className="flex-1 px-6 py-3 bg-coducators-green text-white rounded-lg shadow hover:bg-green"
-  >
-    Read More Success Stories!
-  </button>
-</div>
-
-        
+        <div className="flex items-center justify-center mt-10">
+          <div className="flex gap-4 flex-wrap w-full max-w-md">
+            <button
+              onClick={() => setShowModal(true)}
+              className="flex-1 px-6 py-3 bg-coducators-green text-white rounded-lg shadow hover:bg-green transition"
+            >
+              Rate Now!
+            </button>
+            <button
+              onClick={() => window.location.href = "/reviews"}
+              className="flex-1 px-6 py-3 bg-coducators-green text-white rounded-lg shadow hover:bg-green transition"
+            >
+              Read More Success Stories!
+            </button>
+          </div>
+        </div>
 
         {showModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
             <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full relative">
               <button
-                className="absolute top-2 right-3 text-gray-600 text-xl font-bold hover:text-red-500 "
+                className="absolute top-2 right-3 text-gray-600 text-xl font-bold hover:text-red-500"
                 onClick={() => setShowModal(false)}
               >
                 ×
@@ -163,8 +146,6 @@ const Testimonials: React.FC = () => {
                   value={inputs.age}
                   required
                 />
-
-                {/* Attend dropdown */}
                 <select
                   name="attend"
                   className="w-full px-4 py-2 border rounded-md text-black"
@@ -172,14 +153,11 @@ const Testimonials: React.FC = () => {
                   value={inputs.attend}
                   required
                 >
-                  <option value="" disabled>
-                    Attend
-                  </option>
+                  <option value="" disabled>Attend</option>
                   <option value="Course">Course</option>
                   <option value="Workshop">Workshop</option>
                   <option value="Camp">Camp</option>
                 </select>
-
                 <textarea
                   name="description"
                   rows={4}
@@ -189,10 +167,9 @@ const Testimonials: React.FC = () => {
                   value={inputs.description}
                   required
                 />
-
                 <button
                   type="submit"
-                  className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                  className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
                 >
                   Submit
                 </button>
@@ -201,8 +178,6 @@ const Testimonials: React.FC = () => {
           </div>
         )}
       </div>
-
-      
     </section>
   );
 };

@@ -28,7 +28,7 @@ const CourseGridContent = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const colors = ['blue', 'green', 'red'];
   const searchParams = useSearchParams();
-  const ageParam = searchParams.get('age'); // e.g. "Ages 5-6"
+  const ageParam = searchParams.get('age'); // e.g. "5-6"
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -36,7 +36,7 @@ const CourseGridContent = () => {
         const res = await fetch('/api/course');
         const data = await res.json();
 
-        const formattedCourses = data.map((course, index) => {
+        const formattedCourses = data.map((course: any, index: number) => {
           const age = JSON.parse(course.age);
           const duration = JSON.parse(course.duration);
           return {
@@ -84,10 +84,12 @@ const CourseGridContent = () => {
     fetchCourses();
   }, [ageParam]);
 
+  const title = ageParam ? `Courses for ${ageParam}` : 'Our Courses';
+
   return (
     <div className="container mx-auto px-4">
       <SectionHeading
-        title="Our Courses"
+        title={title}
         subtitle="Explore our range of coding courses designed for different age groups and skill levels."
         color="blue"
       />
@@ -123,7 +125,6 @@ const CourseGrid = () => {
         id="courses"
         className="py-20 bg-coducators-lightgray dark:bg-gray-900 dark:text-white"
       >
-        {/* Suspense fixes useSearchParams() warning */}
         <Suspense fallback={<div className="text-center">Loading...</div>}>
           <CourseGridContent />
         </Suspense>
